@@ -1,0 +1,51 @@
+/**
+ * @file style.css
+ * @author William Bruno
+ * @date 2013-05-25
+ */
+* { margin: 0; padding: 0; list-style: none; border: none; }
+
+body { background: #fff; }
+
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.content { margin: 0 auto; }
+.fleft { float: left; }
+.fright { float: right; }
+.clear { clear: both; }
+
+.overflow { overflow: hidden; }
+
+.hidden-text { overflow: hidden; text-indent: 100%; white-space: nowrap; }
+.is-hidden { display: none; }
+
+#adcast-wrap {
+	width: 728px; height: 400px;
+	padding: 20px; margin-top: 30px;
+	background: #000;
+	margin-bottom: 10px;
+	position: relative;
+}
+#adcast-wrap .overflow { height: 100%; position: relative; }
+.adcast-item {
+	margin: 0 10px 10px 0;
+	position: absolute;
+	top: 0; left: 0;
+	transition: 2s;
+	opacity: 0;
+}
+#adcast .is-active { opacity: 1; }
+#pager {
+	background: rgba(255, 255, 255, 0.3);
+	padding: 10px;
+	position: absolute; z-index: 10;
+	right: 0; bottom: 0;
+}
+.pager-item {
+	cursor: pointer; border: 2px solid transparent;
+	width: 30px; height: 30px;
+	border-radius: 50%;
+}
+.pager-item:hover,
+.pager-item.is-active { border: 2px solid #FF0207; }
