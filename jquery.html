@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SlideShow JavaScript em VanillaJS</title>
+
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<div id="adcast-wrap" class="content">
+		<div class="overflow">
+			<ul id="adcast">
+				<li class="adcast-item is-active"><img src="images/adcast-1.jpg" alt="" /></li>
+				<li class="adcast-item"><img src="images/adcast-2.jpg" alt="" /></li>
+				<li class="adcast-item"><img src="images/adcast-3.jpg" alt="" /></li>
+				<li class="adcast-item"><img src="images/adcast-4.jpg" alt="" /></li>
+				<li class="adcast-item"><img src="images/adcast-5.jpg" alt="" /></li>
+			</ul><!-- #adacst -->
+			<div id="pager">
+				<img src="images/bullet-1.png" alt="" class="pager-item fleft is-active" data-adcast="0" />
+				<img src="images/bullet-2.png" alt="" class="pager-item fleft" data-adcast="1" />
+				<img src="images/bullet-3.png" alt="" class="pager-item fleft" data-adcast="2" />
+				<img src="images/bullet-4.png" alt="" class="pager-item fleft" data-adcast="3" />
+				<img src="images/bullet-5.png" alt="" class="pager-item fleft" data-adcast="4" />
+			</div><!-- #pager -->
+		</div><!-- .overflow -->
+	</div><!-- #adacst-wrap -->
+
+<script src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
+<script src="slideshow.js"></script>
+<script>
+(function() {
+    "use strict";
+    /*global jQuery:false */
+    var $adcasts = jQuery('.adcast-item'),
+        $pagers = jQuery('.pager-item');
+
+    adcast.init($adcasts, $pagers);
+
+}());
+</script>
+</body>
+</html>
