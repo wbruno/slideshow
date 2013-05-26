@@ -18,6 +18,7 @@ var adcast = (function() {
             }
         },
         init : function($adcasts, $pagers) {
+            adcast.$adcastWrap = $adcasts[0].parentNode;
             adcast.$adcasts = $adcasts;
             adcast.$pagers = $pagers;
             adcast.max = adcast.$adcasts.length;
@@ -34,6 +35,7 @@ var adcast = (function() {
             var i = adcast.atual;
             adcast.$adcasts[i].classList.add('is-active');
             adcast.$pagers[i].classList.add('is-active');
+            adcast.$adcastWrap.className = 'adcast-item-' + i;
         },
         none : function() {
             adcast.each(adcast.$adcasts, function($adcast) {
