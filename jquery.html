@@ -35,7 +35,10 @@
     var $adcasts = jQuery('.adcast-item'),
         $pagers = jQuery('.pager-item');
 
-    adcast.init($adcasts, $pagers);
+    adcast.init({
+    	adcasts: $adcasts,
+    	pagers: $pagers
+    });
 
 }());
 </script>
