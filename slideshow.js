@@ -17,10 +17,12 @@ var adcast = (function() {
                 cb($elements[i]);
             }
         },
-        init : function($adcasts, $pagers) {
-            adcast.$adcastWrap = $adcasts[0].parentNode;
-            adcast.$adcasts = $adcasts;
-            adcast.$pagers = $pagers;
+        init : function(config) {
+            adcast.$adcastWrap = config.adcasts[0].parentNode;
+            adcast.$adcasts = config.adcasts;
+            adcast.$pagers = config.pagers;
+            adcast.onChange = config.onChange;
+
             adcast.max = adcast.$adcasts.length;
 
             if (!adcast.max || adcast.max === 1) {
@@ -36,6 +38,10 @@ var adcast = (function() {
             adcast.$adcasts[i].classList.add('is-active');
             adcast.$pagers[i].classList.add('is-active');
             adcast.$adcastWrap.className = 'adcast-item-' + i;
+
+            if(adcast.onChange) {
+                adcast.onChange(i);
+            }
         },
         none : function() {
             adcast.each(adcast.$adcasts, function($adcast) {

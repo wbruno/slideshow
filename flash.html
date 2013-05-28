@@ -6,18 +6,9 @@
 
 	<link rel="stylesheet" href="style.css" />
 <style>
-#adcast {
-	width: 3640px;
-	position: absolute;
-	top: 0; left: 0;
-	transition: 2s;
-}
-.adcast-item { float: left; position: static; margin: 0; opacity: 1; }
-#adcast.adcast-item-0 { left: 0; }
-#adcast.adcast-item-1 { left: -728px; }
-#adcast.adcast-item-2 { left: -1456px; }
-#adcast.adcast-item-3 { left: -2184px; }
-#adcast.adcast-item-4 { left: -2912px; }
+#adcast-wrap { height: 300px; }
+.adcast-item { top: -100px; transition: top 3.5s, opacity 1s; }
+#adcast .adcast-item.is-active { top: 0px; }
 </style>
 </head>
 <body>
@@ -53,8 +44,11 @@
         $pagers = $('.pager-item');
 
     adcast.init({
-        adcasts: $adcasts,
-        pagers: $pagers
+    	adcasts: $adcasts,
+    	pagers: $pagers,
+    	onChange: function(i) {
+    		console.log(i);
+    	}
     });
 
 }());
