@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SlideShow JavaScript em VanillaJS</title>
+
+	<link rel="stylesheet" href="style.css" />
+<style>
+.adcast-item {
+	-webkit-transform: scale(0.5, 0.5);
+			transform: scale(0.5, 0.5);
+	transition: 1s transform, 0.5 opacity; background: #000;
+}
+#adcast .is-active {
+	-webkit-transform: scale(1, 1);
+			transform: scale(1, 1);
+}
+</style>
+</head>
+<body>
+	<div id="adcast-wrap" class="content">
+		<div class="overflow">
+			<ul id="adcast">
+				<li class="adcast-item is-active"><img src="images/adcast-1.jpg" alt="" /></li>
+				<li class="adcast-item"><img src="images/adcast-2.jpg" alt="" /></li>
+				<li class="adcast-item"><img src="images/adcast-3.jpg" alt="" /></li>
+				<li class="adcast-item"><img src="images/adcast-4.jpg" alt="" /></li>
+				<li class="adcast-item"><img src="images/adcast-5.jpg" alt="" /></li>
+			</ul><!-- #adacst -->
+			<div id="pager">
+				<img src="images/bullet-1.png" alt="" class="pager-item fleft is-active" data-adcast="0" />
+				<img src="images/bullet-2.png" alt="" class="pager-item fleft" data-adcast="1" />
+				<img src="images/bullet-3.png" alt="" class="pager-item fleft" data-adcast="2" />
+				<img src="images/bullet-4.png" alt="" class="pager-item fleft" data-adcast="3" />
+				<img src="images/bullet-5.png" alt="" class="pager-item fleft" data-adcast="4" />
+			</div><!-- #pager -->
+		</div><!-- .overflow -->
+	</div><!-- #adacst-wrap -->
+
+<script src="slideshow.js"></script>
+<script>
+(function() {
+    "use strict";
+    /*global document:false */
+    var $ = function(selector) {
+        return document.querySelectorAll(selector);
+   	},
+        $adcasts = $('.adcast-item'),
+        $pagers = $('.pager-item');
+
+    adcast.init({
+        adcasts: $adcasts,
+        pagers: $pagers
+    });
+
+}());
+</script>
+</body>
+</html>
