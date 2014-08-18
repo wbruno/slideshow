@@ -6,107 +6,106 @@
 var adcast = (function(w) {
     "use strict";
     /*jslint plusplus: true, browser: true */
-    var adcast = {
+    var module = {
         timer : 0,
         atual : 0,
-        max : 1,
+        max   : 1,
         delay : 4000,
         config : function(config) {
-            adcast.$adcastWrap = config.adcasts[0].parentNode;
-            adcast.$adcasts = config.adcasts;
-            adcast.$pagers = config.pagers;
-            adcast.onChange = config.onChange;
-            adcast.pagersClick = config.pagersClick || false;
+            module.$adcastWrap  = config.adcasts[0].parentNode;
+            module.$adcasts     = [].slice.call(config.adcasts);
+            module.$pagers      = [].slice.call(config.pagers);
+            module.onChange     = config.onChange;
+            module.pagersClick  = config.pagersClick || false;
 
-            adcast.max = adcast.$adcasts.length;
-        },
-        each : function($elements, cb) {
-            var i = $elements.length;
-            while (i--) {
-                cb($elements[i]);
-            }
+            module.max = module.$adcasts.length;
         },
         active : function() {
-            var i = adcast.atual;
-            adcast.$adcasts[i].classList.add('is-active');
-            adcast.$pagers[i].classList.add('is-active');
-            adcast.$adcastWrap.className = 'adcast-item-' + i;
+            var i = module.atual;
+            module.$adcasts[i].classList.add('is-active');
+            module.$pagers[i].classList.add('is-active');
+            module.$adcastWrap.className = 'adcast-item-' + i;
 
-            if (adcast.onChange) {
-                adcast.onChange(i);
+            if (module.onChange) {
+                module.onChange(i);
             }
         },
         none : function() {
-            adcast.each(adcast.$adcasts, function($adcast) {
+            module.$adcasts.forEach(function($adcast) {
                 $adcast.classList.remove('is-active');
             });
-            adcast.each(adcast.$pagers, function($pager) {
+            module.$pagers.forEach(function($pager) {
                 $pager.classList.remove('is-active');
             });
         },
         next : function() {
-            var i = adcast.atual;
+            var i = module.atual;
 
-            adcast.none();
-            adcast.active();
+            module.none();
+            module.active();
 
-            adcast.atual = i < adcast.max - 1 ? parseInt(i, 10) + 1 : 0;
+            module.atual = i < module.max - 1 ? parseInt(i, 10) + 1 : 0;
         },
         auto : function() {
-            adcast.timer = w.setInterval(function() {
-                adcast.next();
-            }, adcast.delay);
+            module.timer = w.setInterval(function() {
+                module.next();
+            }, module.delay);
+        },
+        _onPagersClick : function($pager) {
+            $pager.addEventListener('click', function() {
+                var $this = this,
+                    i = $this.getAttribute('data-adcast');
+
+                w.clearInterval(module.timer);
+                w.clearTimeout(module.tot);
+                module.tot = w.setTimeout(module.auto, module.delay / 2);
+
+                module.atual = i < module.max ? parseInt(i, 10) : 0;
+                module.next();
+            });
+        },
+        _onPagersHover : function($pager) {
+            $pager.addEventListener('mouseover', function() {
+                var $this = this,
+                    i = $this.getAttribute('data-adcast');
+
+                module.atual = i;
+                w.clearInterval(module.timer);
+                module.none();
+                module.active();
+            });
+            $pager.addEventListener('mouseout', function() {
+                var $this = this,
+                    i = $this.getAttribute('data-adcast');
+
+                module.atual = i < module.max - 1 ? parseInt(i, 10) + 1 : 0;
+                module.auto();
+            });
         },
         events : function() {
-            var $adcast = adcast;
-            adcast.each(adcast.$pagers, function($element) {
-                if (adcast.pagersClick) {
-                    $element.addEventListener('click', function() {
-                        var $this = this,
-                            i = $this.getAttribute('data-adcast');
-
-                        w.clearInterval(adcast.timer);
-                        w.clearTimeout(adcast.tot);
-                        adcast.tot = w.setTimeout(adcast.auto, adcast.delay / 2);
-
-                        adcast.atual = i < adcast.max ? parseInt(i, 10) : 0;
-                        adcast.next();
-                    });
+            module.$pagers.forEach(function($pager) {
+                if (module.pagersClick) {
+                    module._onPagersClick($pager);
                 } else {
-                    $element.addEventListener('mouseover', function() {
-                        var $this = this,
-                            i = $this.getAttribute('data-adcast');
-
-                        adcast.atual = i;
-                        w.clearInterval(adcast.timer);
-                        $adcast.none();
-                        $adcast.active();
-                    });
-                    $element.addEventListener('mouseout', function() {
-                        var $this = this,
-                            i = $this.getAttribute('data-adcast');
-
-                        adcast.atual = i < adcast.max - 1 ? parseInt(i, 10) + 1 : 0;
-                        adcast.auto();
-                    });
+                    module._onPagersHover($pager);
                 }
             });
         },
         init : function(config) {
-            adcast.config(config);
+            module.config(config);
 
-            if (!adcast.max || adcast.max === 1) {
+            if (!module.max || module.max === 1) {
                 return;
             }
 
-            adcast.next();
-            adcast.auto();
-            adcast.events();
+            module.next();
+            module.auto();
+            module.events();
         }
     };
 
     return {
-        init : adcast.init
+        init : module.init
     };
 
 }(window));
