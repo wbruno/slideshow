@@ -92,7 +92,7 @@ var adcast = (function(window, document) {
             });
         },
         _keyboard : function() {
-            document.addEventListener('keypress', function(event){
+            document.addEventListener('keydown', function(event){
                 var i;
                 if(event.keyCode == 39) { //right
                     i = module.atual + 1;
