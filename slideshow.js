@@ -3,7 +3,7 @@
  * @author William Bruno
  * @date 2013-05-25
  */
-var adcast = (function(w) {
+var adcast = (function(window, document) {
     "use strict";
     /*jslint plusplus: true, browser: true */
     var module = {
@@ -43,24 +43,33 @@ var adcast = (function(w) {
 
             module.none();
             module.active();
-
-            module.atual = i < module.max - 1 ? parseInt(i, 10) + 1 : 0;
+        },
+        _setAtual : function(i) {
+            if (i < 0) {
+                module.atual = module.max - 1;
+            } else {
+                module.atual = i < module.max ? parseInt(i, 10) : 0;
+            }
         },
         auto : function() {
-            module.timer = w.setInterval(function() {
+            module.timer = window.setInterval(function() {
+                module._setAtual(module.atual + 1);
                 module.next();
             }, module.delay);
+        },
+        _pause: function() {
+            window.clearInterval(module.timer);
+            window.clearTimeout(module.tot);
         },
         _onPagersClick : function($pager) {
             $pager.addEventListener('click', function() {
                 var $this = this,
                     i = $this.getAttribute('data-adcast');
 
-                w.clearInterval(module.timer);
-                w.clearTimeout(module.tot);
-                module.tot = w.setTimeout(module.auto, module.delay / 2);
+                module._pause();
+                module.tot = window.setTimeout(module.auto, module.delay / 2);
 
-                module.atual = i < module.max ? parseInt(i, 10) : 0;
+                module._setAtual(i);
                 module.next();
             });
         },
@@ -70,7 +79,7 @@ var adcast = (function(w) {
                     i = $this.getAttribute('data-adcast');
 
                 module.atual = i;
-                w.clearInterval(module.timer);
+                window.clearInterval(module.timer);
                 module.none();
                 module.active();
             });
@@ -78,8 +87,22 @@ var adcast = (function(w) {
                 var $this = this,
                     i = $this.getAttribute('data-adcast');
 
-                module.atual = i < module.max - 1 ? parseInt(i, 10) + 1 : 0;
+                module._setAtual(i);
                 module.auto();
+            });
+        },
+        _keyboard : function() {
+            document.addEventListener('keypress', function(event){
+                var i;
+                if(event.keyCode == 39) { //right
+                    i = module.atual + 1;
+                }
+                if(event.keyCode == 37) { //left
+                    i = module.atual - 1;
+                }
+
+                module._setAtual(i);
+                module.next();
             });
         },
         events : function() {
@@ -90,6 +113,7 @@ var adcast = (function(w) {
                     module._onPagersHover($pager);
                 }
             });
+            module._keyboard();
         },
         init : function(config) {
             module.config(config);
@@ -108,4 +132,4 @@ var adcast = (function(w) {
         init : module.init
     };
 
-}(window));
+}(window, document));
