@@ -26,6 +26,7 @@ a:hover { text-decoration: underline; }
 	background: #000;
 	margin-bottom: 10px;
 	position: relative;
+	box-sizing: border-box;
 }
 #adcast-wrap .overflow { height: 100%; position: relative; }
 .adcast-item {
@@ -34,7 +35,10 @@ a:hover { text-decoration: underline; }
 	top: 0; left: 0;
 	transition: 2s;
 	opacity: 0;
+	display: block;
 }
+.adcast-item img { display: block; }
+
 #adcast .is-active { opacity: 1; }
 #pager {
 	background: rgba(255, 255, 255, 0.3);
@@ -49,3 +53,11 @@ a:hover { text-decoration: underline; }
 }
 .pager-item:hover,
 .pager-item.is-active { border: 2px solid #FF0207; }
+
+@media only screen and (max-width: 728px) {
+	img { max-width: 100% !important; height: auto !important; }
+	#adcast,
+	#adcast-wrap { width: 100%; height: auto; }
+	.adcast-item { width: 100%; }
+	#adcast-gif { display: block; }
+}
