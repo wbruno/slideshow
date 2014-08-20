@@ -26,14 +26,22 @@ a:hover { text-decoration: underline; }
 	background: #000;
 	margin-bottom: 10px;
 	position: relative;
-	box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+       -o-box-sizing: border-box;
+          box-sizing: border-box;
 }
 #adcast-wrap .overflow { height: 100%; position: relative; }
 .adcast-item {
 	margin: 0 10px 10px 0;
 	position: absolute;
 	top: 0; left: 0;
-	transition: 2s;
+  -webkit-transition: 2s;
+     -moz-transition: 2s;
+      -ms-transition: 2s;
+       -o-transition: 2s;
+	        transition: 2s;
 	opacity: 0;
 	display: block;
 }
