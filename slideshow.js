@@ -17,7 +17,6 @@ var adcast = (function(window, document) {
             module.$pagers      = [].slice.call(config.pagers);
             module.onChange     = config.onChange;
             module.pagersClick  = config.pagersClick || false;
-            module.auto         = config.auto || true;
 
             module.max = module.$adcasts.length;
         },
@@ -52,7 +51,7 @@ var adcast = (function(window, document) {
                 module.atual = i < module.max ? parseInt(i, 10) : 0;
             }
         },
-        auto : function() {
+        _auto : function() {
             module.timer = window.setInterval(function() {
                 module._setAtual(module.atual + 1);
                 module.next();
@@ -124,7 +123,7 @@ var adcast = (function(window, document) {
             }
 
             module.next();
-            if (module.auto) module.auto();
+            if (config.auto) module._auto();
             module.events();
         }
     };
