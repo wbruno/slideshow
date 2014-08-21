@@ -17,6 +17,7 @@ var adcast = (function(window, document) {
             module.$pagers      = [].slice.call(config.pagers);
             module.onChange     = config.onChange;
             module.pagersClick  = config.pagersClick || false;
+            module.auto         = config.auto || true;
 
             module.max = module.$adcasts.length;
         },
@@ -123,7 +124,7 @@ var adcast = (function(window, document) {
             }
 
             module.next();
-            module.auto();
+            if (module.auto) module.auto();
             module.events();
         }
     };
