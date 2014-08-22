@@ -102,10 +102,10 @@ var adcast = (function (window, document) {
         _keyboard : function () {
             document.addEventListener('keydown', function (event){
                 var i;
-                if(event.keyCode == 39) { //right
+                if (event.keyCode === 39 || event.keyCode === 76) { //right
                     i = module.atual + 1;
                 }
-                if(event.keyCode == 37) { //left
+                if (event.keyCode === 37 || event.keyCode === 72) { //left
                     i = module.atual - 1;
                 }
 
