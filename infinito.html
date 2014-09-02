@@ -14,30 +14,26 @@
        -o-transition: 1s;
           transition: 1s;
 }
-.adcast-item img {
-  -webkit-transition: 1s;
-     -moz-transition: 1s;
-      -ms-transition: 1s;
-       -o-transition: 1s;
-          transition: 1s;
-}
+
 #adcast-wrap { width: 1200px; padding: 0; background: none; }
 
 .adcast-item.is-active {
-  position: absolute; left: 230px;
+  position: absolute;
+  left: 50%; margin-left: -390px;
   z-index: 2;
 }
 
-.prev img,
-.next img {
+.prev,
+.next {
   -webkit-transform: scale(0.5);
      -moz-transform: scale(0.5);
       -ms-transform: scale(0.5);
        -o-transform: scale(0.5);
           transform: scale(0.5);
 }
-.prev { left: -100px; }
-.next { left: 580px; }
+.prev { left: -150px; margin-left: 0; }
+.next { left: 580px; margin-left: 0; }
+
 .is-active,
 .prev,
 .next { display: block; opacity: 1; }

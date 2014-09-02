@@ -76,7 +76,7 @@ var adcast = (function (window, document) {
                     i = parseInt($this.getAttribute('data-adcast'), 10);
 
                 module._pause();
-                module.tot = window.setTimeout(module.auto, module.delay / 2);
+                module.tot = window.setTimeout(module._auto, module.delay / 2);
 
                 module._setAtual(i);
                 module.next();
@@ -96,7 +96,7 @@ var adcast = (function (window, document) {
                     i = parseInt($this.getAttribute('data-adcast'), 10);
 
                 module._setAtual(i);
-                module.auto();
+                module._auto();
             });
         },
         _keyboard : function () {
