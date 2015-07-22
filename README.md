@@ -4,6 +4,7 @@ SlideShow JavaScript desenvolvido em VanillaJS
 
 ## Veja as transições de exemplo:
 
+* [Infinito](http://wbruno.github.io/slideshow/infinito.html)
 * [Fade](http://wbruno.github.io/slideshow/fade.html)
 * [Carousel Horizontal](http://wbruno.github.io/slideshow/carousel-horizontal.html)
 * [Carousel Vertical](http://wbruno.github.io/slideshow/carousel-vertical.html)
